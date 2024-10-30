@@ -1,0 +1,16 @@
+{
+  "name": "peg-game-app",
+  "version": "1.0.0",
+  "description": "peg game",
+  "main": "main.js",
+  "author": "Francisco J Barranco R",
+  "license": "Yes",
+  "private": false,
+  "scripts": {
+    "start": "electron .",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "electron": "^33.0.2"
+  }
+}
