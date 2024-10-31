@@ -11,18 +11,23 @@ document.getElementById('print-pegs').innerHTML = (
   }).join('')
 )
 
+const getResult = () => {
+  remainingOpts === 0 && (
+    document.getElementsByClassName('enabled').length === 1 ? (
+      document.getElementById('finished-game').innerHTML = '<h1 id="title-result">Congratulations, </br> you win!</h1><img src="../assets/big.gif"/>'
+    ) : (
+      document.getElementById('finished-game').innerHTML = '<h1 id="title-result">Sorry, you lose!</h1><img src="../assets/nelson.gif"/>'
+    )
+  )
+}
+
 const verifyStatus = () => {
   const remainingPlay = document.getElementsByClassName('enabled')
-  // if (remainingPlay.length < 10) {
     for (let i = 0; i < remainingPlay.length; i++){
       getOptions(remainingPlay[i])
     }
     clearOptions()
-    remainingOpts === 0 && (
-      document.getElementById('finished-game').innerHTML = '<h1>Perdiste</h1>'
-    )
-  // }
-
+    getResult()
 }
 
 const findPegLeap = (rowPeg, rowPlay, valPeg, valPlay, play, peg) => {
@@ -41,11 +46,10 @@ const findPegLeap = (rowPeg, rowPlay, valPeg, valPlay, play, peg) => {
     peg.classList.add('enabled')
     peg.classList.remove('option', 'showOption', 'playing', 'empty')
     clearOptions()
-    verifyStatus()
   }
 }
 
-const playPeg = (peg) => {
+const playPeg = async (peg) => {
   const play = document.getElementsByClassName('playing')[0]
   const rowPlay = Number(play.getAttribute('row'))
   const rowPeg = Number(peg.getAttribute('row')) 
@@ -55,23 +59,16 @@ const playPeg = (peg) => {
   const valPeg = Number(peg.getAttribute('value'))
   if ((rowPlay === rowPeg && (iPlay + 2 === iPeg || iPlay - 2 === iPeg)) ||
   (rowPlay + 2 === rowPeg || rowPlay - 2 === rowPeg) && (iPeg === iPlay || iPeg + 2 === iPlay || iPeg - 2 === iPlay)) {
-    findPegLeap(rowPeg, rowPlay, valPeg, valPlay, play, peg)
+    await findPegLeap(rowPeg, rowPlay, valPeg, valPlay, play, peg)
   }
 }
 
 const clearOptions = () => {
-  const options = document.getElementsByClassName('option')
-  if (options.length > 0) {
-    for (let i = 0; i < options.length; i++){
-      options[i].classList.remove('option', 'showOption')
+  const optionsClear = document.getElementsByClassName('option')
+  if (optionsClear.length > 0) {
+    for (let i = 0; i < optionsClear.length; i++){
+      optionsClear[i]?.classList.remove('option', 'showOption')
     }
-  }
-}
-
-const showOptions = () => {
-  const options = document.getElementsByClassName('option')
-  for (let i = 0; i < options.length; i++){
-    options[i].classList.add('showOption')
   }
 }
 
@@ -83,26 +80,36 @@ const getOptions = (play) => {
     const rowOpts = document.querySelectorAll(`[row='${Number(rowPlay) + 2}']`)
     const rowLeap = document.querySelectorAll(`[row='${Number(rowPlay) + 1}']`)
     if (rowOpts[iPlay]?.classList.contains('empty') && rowLeap[iPlay]?.classList.contains('enabled'))
-      {rowOpts[iPlay].classList.add('option')}
+      {play.classList.contains('playing') ? rowOpts[iPlay].classList.add('option', 'showOption') : rowOpts[iPlay].classList.add('option')}
     if (rowOpts[Number(iPlay) + 2]?.classList.contains('empty') && rowLeap[Number(iPlay) + 1]?.classList.contains('enabled'))
-      {rowOpts[Number(iPlay) + 2].classList.add('option')}
-  }
+      {play.classList.contains('playing') ?
+          rowOpts[Number(iPlay) + 2].classList.add('option', 'showOption') :
+          rowOpts[Number(iPlay) + 2].classList.add('option')}
+    }
   // get above options
   if (rowPlay > 1) {
     const rowOpts = document.querySelectorAll(`[row='${Number(rowPlay) - 2}']`)
     const rowLeap = document.querySelectorAll(`[row='${Number(rowPlay) - 1}']`)
     if (rowOpts[iPlay]?.classList.contains('empty') && rowLeap[iPlay]?.classList.contains('enabled'))
-      {rowOpts[iPlay].classList.add('option')}
+      {play.classList.contains('playing') ?
+        rowOpts[iPlay].classList.add('option', 'showOption') :
+        rowOpts[iPlay].classList.add('option')}
     if (rowOpts[Number(iPlay) - 2]?.classList.contains('empty') && rowLeap[Number(iPlay) - 1]?.classList.contains('enabled'))
-      {rowOpts[Number(iPlay) - 2].classList.add('option')}
+      {play.classList.contains('playing') ?
+          rowOpts[Number(iPlay) - 2].classList.add('option', 'showOption') :
+          rowOpts[Number(iPlay) - 2].classList.add('option')}
   }
   // get lateral options
   if (Number(iPlay) + 2 <= Object.keys(pegs[rowPlay]).length || Number(iPlay) > 2) {
     const rowOpts = document.querySelectorAll(`[row='${Number(rowPlay)}']`)
     if (rowOpts[Number(iPlay) - 2]?.classList.contains('empty') && !rowOpts[Number(iPlay) - 1]?.classList.contains('empty'))
-      {rowOpts[Number(iPlay) - 2].classList.add('option')}
+      {play.classList.contains('playing') ?
+        rowOpts[Number(iPlay) - 2].classList.add('option', 'showOption') :
+        rowOpts[Number(iPlay) - 2].classList.add('option')}
     if (rowOpts[Number(iPlay) + 2]?.classList.contains('empty') && !rowOpts[Number(iPlay) + 1]?.classList.contains('empty'))
-      {rowOpts[Number(iPlay) + 2].classList.add('option')}
+      {play.classList.contains('playing') ?
+        rowOpts[Number(iPlay) + 2].classList.add('option', 'showOption') :
+        rowOpts[Number(iPlay) + 2].classList.add('option')}
   }
   remainingOpts = document.getElementsByClassName('option').length
 }
@@ -120,8 +127,7 @@ const handlerPegs = (peg) => {
       document.getElementsByClassName('playing')[0].classList.remove('playing')
       peg.classList.add('playing')
       getOptions(document.getElementsByClassName('playing')[0])
-      showOptions()
   } else {
-    document.getElementsByClassName('playing').length === 1 && playPeg(peg)
+    document.getElementsByClassName('playing').length === 1 && playPeg(peg).then(() => verifyStatus())
   }
 } 

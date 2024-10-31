@@ -10,7 +10,15 @@ const handlerBtnPlay = () => {
   localStorage.setItem('pegs', JSON.stringify(pegs))
 }
 const handlerInpValue = () => {
-  inpValue.value > 3 ? btnPlay.removeAttribute('class', 'enabled') : btnPlay.setAttribute('class', 'enabled')
+  Number(inpValue.value) > 4 ? (
+    btnPlay.classList.add('enabled'),
+    btnPlay.classList.remove('disabled'),
+    btnPlay.removeAttribute('disabled')
+  ) : (
+    btnPlay.classList.add('disabled'),
+    btnPlay.classList.remove('enabled'),
+    btnPlay.setAttribute('disabled')
+  )
 }
 const inpValue = document.getElementById("inp-value")
 const btnPlay = document.getElementById("btn-play")
