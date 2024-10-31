@@ -1,0 +1,34 @@
+# The Peg Game
+
+Place a peg in each of the holes of the game board. You'll have one place on the board that won't have a peg. Jump one peg over another to an open space and remove the one that was jumped. Keep doing this until only a single peg remains. If you are successful and leave only one peg, you are a “genius.”
+
+## Installation
+
+Use the package manager [yarn](https://yarnpkg.com/getting-started/install) to install TPG.
+
+```bash
+yarn install
+```
+
+## Usage
+
+```bash
+yarn start
+```
+
+## Notes
+
+- Is a desktop app made with Electron
+- If you want to debug just uncomment line 12 from main.js file
+- You can change the level of difficulty
+
+## Contributing
+
+Pull requests are welcome. For major changes, please open an issue first
+to discuss what you would like to change.
+
+Please make sure to update tests as appropriate.
+
+## License
+
+[MIT](https://choosealicense.com/licenses/mit/)
