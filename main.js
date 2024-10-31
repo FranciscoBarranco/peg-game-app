@@ -9,7 +9,7 @@ const createWindow = () => {
 
   win.loadFile('./index.html')
 
-  setTimeout(() => {win.webContents.openDevTools({mode: "undocked", activate: true})}, 500)
+  // setTimeout(() => {win.webContents.openDevTools({mode: "undocked", activate: true})}, 500)
 }
 
 app.whenReady().then(() => {

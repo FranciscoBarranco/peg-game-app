@@ -1,5 +1,65 @@
-a.disabled {
-    color: lightgray;
+body {
+  background-image: url('../assets/bg-wood.jpg');
+  background-repeat: repeat;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  text-align: center;
+}
+
+#title {
+  text-align: center;
+  color:#836518;
+  text-shadow: #381f01 1px 1px;
+  margin-bottom: 50px;
+}
+
+#inp-value {
+  align-self: center;
+  display: inline-block;
+  width: 50px;
+  padding: 15px 30px;
+  border-radius: 40px;
+  font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  font-size: 30px;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+input#inp-value::-webkit-outer-spin-button,
+input#inp-value::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input#inp-value[type=number] {
+  -moz-appearance: textfield;
+}
+
+a#btn-play {
+    color: rgb(122, 88, 25);
+    font-size: 20px;
+    text-decoration: none;
     pointer-events: none;
     cursor: default;
+    display: block;
+    margin: 0 auto;
+    border-radius: 30px;
+    padding: 25px 50px;
+    width: 40px;
+    height: 20px;
+    background-color:#836518;
+    box-shadow:rgb(78, 39, 0) 2px 2px 3px;
+}
+
+a#btn-play.enabled {
+  color: rgb(217, 199, 164);
+  background-color:#836518;
+  box-shadow:rgb(78, 39, 0) 2px 2px 3px;
+  pointer-events: all;
+  cursor: pointer;
+}
+
+a#btn-play.disabled {
+  color: rgb(131, 119, 97);
+  background-color:#a39b85;
+  box-shadow:none
 }
