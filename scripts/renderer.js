@@ -1,13 +1,13 @@
-const creatorPegs = (value) => {
-  const arrPegs = []
-  for (let counter = 1; counter <= value; counter++){
-    arrPegs.push(Array.from({length: counter}, (_, i) => ((counter * (counter + 1)) / 2) - i).reverse().reduce((a, v) => ({...a, [v]: false}), {}))
-  }
-  return arrPegs
+const createBoard = (rows) => {
+  const totalPositions = (rows * (rows + 1)) / 2
+  const board = Array(totalPositions).fill(true)
+  return board
 }
+
 const handlerBtnPlay = () => {
-  const pegs = creatorPegs(Number(inpValue.value))
+  const pegs = createBoard(Number(inpValue.value))
   localStorage.setItem('pegs', JSON.stringify(pegs))
+  localStorage.setItem('rows', inpValue.value)
 }
 const handlerInpValue = () => {
   Number(inpValue.value) > 4 ? (

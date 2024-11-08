@@ -2,6 +2,7 @@ body {
   background-image: url('../assets/bg-wood.jpg');
   background-repeat: repeat;
   font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+  justify-items: center;
 }
 
 #title, #finished-game, #title-result {
@@ -28,70 +29,48 @@ body {
   width: 200px;
 }
 
-ul#print-pegs{
-  margin-bottom: 50px;
+.board {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+  margin-bottom: 40px;
 }
-
-ul#print-pegs, ul#print-pegs ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
+.row {
+  display: flex;
+  justify-content: center;
 }
-
-ul#print-pegs ul {
-  text-align: center;
-}
-
-ul#print-pegs ul li {
-  display: inline-block;
-  position: relative;
-  margin: 8px 16px;
-  width: 45px;
-  height: 45px;
-  border-radius: 50%;
-}
-
-ul#print-pegs ul li.enabled {
+.peg {
+  width: 40px;
+  height: 40px;
+  margin: 4px 8px;
   background-color: rgb(211, 74, 61);
   box-shadow: inset 10px 5px 20px rgb(92, 8, 0);
+  border-radius: 50%;
+  cursor: pointer;
 }
-
-ul#print-pegs ul li.empty {
+.empty {
   background-color: #a17e24;
   box-shadow: inset -1px -1px 1px #3b2a00;
 }
-
-ul#print-pegs ul li.playing {
-  top: -10px;
-  background-color: rgb(211, 74, 61);
-  box-shadow: inset 10px 5px 20px rgb(28, 2, 0);
-}
-
-ul#print-pegs ul li.playing::after {
-  content: "";
-  display: inline-block;
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  left: 0px;
-  top: 10px;
-  background-color: #836518;
-  box-shadow: inset -1px 3px 1px #3b2a00;
-  z-index: -1;
-}
-
-ul#print-pegs ul li.showOption {
-  background-color: rgb(207, 168, 68);
-  box-shadow: inset -1px -1px 1px #725200;
-}
-
-ul#print-pegs ul li:hover {
+a#btn-solution {
+  font-size: 20px;
+  text-decoration: none;
+  display: none;
+  border-radius: 30px;
+  padding: 20px 50px 23px;
+  min-width: 40px;
+  height: 20px;
+  color: rgb(217, 199, 164);
+  border: 2px solid #725711;
+  background-color:#836518;
+  box-shadow:rgb(78, 39, 0) -1px -1px 2px;
+  pointer-events: all;
   cursor: pointer;
 }
-
-/* ul#print-pegs ul li a{
-  display: block;
-  width: 100%;
-  height: 100%;
-} */
+a#btn-solution.show {
+  display: inline-flex;
+}
+a#btn-solution.processing {
+  background-color:#a18743;
+}

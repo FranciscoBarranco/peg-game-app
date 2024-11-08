@@ -43,17 +43,18 @@ a#btn-play {
     display: block;
     margin: 0 auto;
     border-radius: 30px;
-    padding: 25px 50px;
+    padding: 20px 50px 23px;
     width: 40px;
     height: 20px;
     background-color:#836518;
-    box-shadow:rgb(78, 39, 0) 2px 2px 3px;
+    box-shadow:rgb(78, 39, 0) -1px -1px 2px;
 }
 
 a#btn-play.enabled {
   color: rgb(217, 199, 164);
   background-color:#836518;
-  box-shadow:rgb(78, 39, 0) 2px 2px 3px;
+  box-shadow:rgb(78, 39, 0) -1px -1px 2px;
+  border: 2px solid #725711;
   pointer-events: all;
   cursor: pointer;
 }
