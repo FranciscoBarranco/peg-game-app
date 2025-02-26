@@ -39,7 +39,7 @@ const generateMoves = (rows) => {
   const moves = []
 
   // A helper function to get the position in the triangular grid based on (row, col)
-  function getPosition(row, col) {
+  const getPosition => (row, col) {
       if (col < 0 || col > row) return null // Ensure valid column in the row
       return (row * (row + 1)) / 2 + col
   }
